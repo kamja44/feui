@@ -1,0 +1,64 @@
+/* vanilla/_shared/base.css
+   모든 vanilla 구현에서 공통으로 사용하는 베이스 스타일
+   각 index.html에서 ../_shared/base.css 로 링크하여 사용 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d1117;
+  --surface:   #161b22;
+  --surface2:  #21262d;
+  --border:    #30363d;
+  --text:      #e6edf3;
+  --text-sub:  #8b949e;
+  --text-muted:#6e7681;
+  --blue:      #58a6ff;
+  --purple:    #bc8cff;
+  --green:     #3fb950;
+  --red:       #f85149;
+  --yellow:    #e3b341;
+  --radius:    8px;
+  --transition:0.2s ease;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 32px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+h2 { font-size: 1rem;   font-weight: 600; margin-bottom: 16px; color: var(--text-sub); }
+p  { font-size: 0.875rem; line-height: 1.6; color: var(--text-sub); }
+
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.todo-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  background: rgba(88, 166, 255, 0.08);
+  border: 1px dashed rgba(88, 166, 255, 0.3);
+  color: var(--blue);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}

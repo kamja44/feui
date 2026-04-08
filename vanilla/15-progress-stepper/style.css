@@ -1,0 +1,12 @@
+/* 15 - Progress Stepper CSS 가이드
+ * #step-indicator { display:flex; align-items:center; gap:0; margin-bottom:16px; }
+ * .step-dot { width:32px; height:32px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:600; flex-shrink:0; transition:all 0.3s; }
+ * .step-dot.done    { background:var(--green); border-color:var(--green); color:white; }
+ * .step-dot.current { background:var(--blue);  border-color:var(--blue);  color:white; }
+ * .step-connector { flex:1; height:2px; background:var(--border); transition:background 0.3s; }
+ * .step-connector.done { background:var(--green); }
+ * #progress-bar-wrapper { height:4px; background:var(--surface2); border-radius:999px; overflow:hidden; margin-bottom:24px; }
+ * #progress-bar { height:100%; background:linear-gradient(90deg, var(--blue), var(--purple)); transition:width 0.4s ease; }
+ * #step-actions { display:flex; justify-content:space-between; margin-top:24px; }
+ * #step-actions button { padding:10px 24px; border:1px solid var(--border); border-radius:8px; background:var(--surface2); color:var(--text); cursor:pointer; font-weight:500; }
+ * #btn-next { background:var(--blue); border-color:var(--blue); color:white; } */

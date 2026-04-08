@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>06 Carousel — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>06 · Carousel / Slider</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <div id="carousel" class="carousel">
+      <div class="carousel-track">
+        <div class="slide">Slide 1</div>
+        <div class="slide">Slide 2</div>
+        <div class="slide">Slide 3</div>
+        <div class="slide">Slide 4</div>
+      </div>
+      <button class="carousel-btn prev" aria-label="이전 슬라이드">‹</button>
+      <button class="carousel-btn next" aria-label="다음 슬라이드">›</button>
+    </div>
+    <div id="indicators" class="indicators"></div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11 Virtual Scroll — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>11 · Virtual Scroll</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <p>총 <strong id="total-count">100,000</strong>개 아이템 중 보이는 것만 렌더링</p>
+    <!-- 스크롤 컨테이너 -->
+    <div id="scroll-container">
+      <!-- 전체 가상 높이 확보용 -->
+      <div id="scroll-height-holder"></div>
+      <!-- 실제 렌더링 영역 -->
+      <div id="visible-items"></div>
+    </div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

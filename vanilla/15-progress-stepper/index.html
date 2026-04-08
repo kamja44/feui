@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15 Progress Stepper — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>15 · Progress / Stepper</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <!-- 스텝 인디케이터 -->
+    <div id="step-indicator" role="list"></div>
+    <!-- 진행 바 -->
+    <div id="progress-bar-wrapper">
+      <div id="progress-bar"></div>
+    </div>
+    <!-- 현재 스텝 컨텐츠 -->
+    <div id="step-content"></div>
+    <!-- 이전/다음 버튼 -->
+    <div id="step-actions">
+      <button id="btn-prev">이전</button>
+      <button id="btn-next">다음</button>
+    </div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

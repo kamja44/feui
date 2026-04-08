@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>04 Tab — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>04 · Tab</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <div id="tab-container">
+      <div role="tablist" id="tablist">
+        <button role="tab" aria-selected="true"  aria-controls="panel-1" id="tab-1">탭 1</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">탭 2</button>
+        <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">탭 3</button>
+      </div>
+      <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">패널 1 내용</div>
+      <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>패널 2 내용</div>
+      <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>패널 3 내용</div>
+    </div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

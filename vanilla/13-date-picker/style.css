@@ -1,0 +1,10 @@
+/* 13 - Date Picker CSS 가이드
+ * #datepicker-container { position:relative; max-width:320px; }
+ * #date-input { width:100%; padding:10px 14px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--text); cursor:pointer; }
+ * #calendar { position:absolute; top:calc(100% + 4px); background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,0.5); z-index:100; width:100%; }
+ * #calendar-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+ * #days-grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; }
+ * #days-grid button { aspect-ratio:1; border:none; background:none; color:var(--text); border-radius:6px; cursor:pointer; font-size:0.8rem; }
+ * #days-grid button:hover { background:var(--surface2); }
+ * #days-grid button.today { color:var(--blue); font-weight:700; }
+ * #days-grid button.selected { background:var(--blue); color:white; } */

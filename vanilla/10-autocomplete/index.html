@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Autocomplete — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>10 · Autocomplete / Search</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <div id="autocomplete-container" class="autocomplete">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="검색어를 입력하세요..."
+        autocomplete="off"
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls="suggestion-list"
+        aria-autocomplete="list"
+      />
+      <ul id="suggestion-list" role="listbox" hidden></ul>
+    </div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

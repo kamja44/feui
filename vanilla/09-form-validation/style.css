@@ -1,0 +1,9 @@
+/* 09 - Form Validation CSS 가이드
+ * .field { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
+ * label { font-size:0.85rem; font-weight:500; color:var(--text-sub); }
+ * input { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; color:var(--text); font-size:0.9rem; outline:none; transition:border-color 0.2s; }
+ * input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(88,166,255,0.15); }
+ * input.invalid { border-color:var(--red); }
+ * input.valid { border-color:var(--green); }
+ * .error-msg { font-size:0.75rem; color:var(--red); min-height:18px; }
+ * button[type="submit"] { width:100%; padding:12px; background:var(--blue); color:white; border:none; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer; } */

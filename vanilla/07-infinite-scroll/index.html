@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>07 Infinite Scroll — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>07 · Infinite Scroll</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <div id="item-list"></div>
+  <!-- 이 요소가 뷰포트에 들어오면 다음 페이지 로드 트리거 -->
+  <div id="sentinel" aria-hidden="true"></div>
+  <div id="loading-indicator" hidden>로딩 중...</div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

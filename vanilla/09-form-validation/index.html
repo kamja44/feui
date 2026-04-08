@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>09 Form Validation — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>09 · Form Validation</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <form id="signup-form" novalidate>
+      <div class="field">
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
+        <span class="error-msg" id="email-error" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" />
+        <span class="error-msg" id="password-error" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="confirm">비밀번호 확인</label>
+        <input type="password" id="confirm" name="confirm" autocomplete="new-password" />
+        <span class="error-msg" id="confirm-error" role="alert"></span>
+      </div>
+      <button type="submit">가입하기</button>
+    </form>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

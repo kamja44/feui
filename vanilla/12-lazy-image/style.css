@@ -1,0 +1,7 @@
+/* 12 - Lazy Image CSS 가이드
+ * #image-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
+ * .img-card { aspect-ratio:4/3; border-radius:8px; overflow:hidden; background:var(--surface2); position:relative; }
+ * .lazy-img { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.4s ease; }
+ * .lazy-img.loaded { opacity:1; }
+ * Shimmer: .img-card::before { content:''; position:absolute; inset:0; background:linear-gradient(...); animation:shimmer 1.5s infinite; }
+ * .img-card:has(.lazy-img.loaded)::before { display:none; } */

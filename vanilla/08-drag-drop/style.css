@@ -1,0 +1,6 @@
+/* 08 - Drag & Drop CSS 가이드
+ * #dnd-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+ * #dnd-list li { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; cursor:grab; user-select:none; transition:box-shadow 0.2s, opacity 0.2s; }
+ * #dnd-list li:active { cursor:grabbing; }
+ * li.dragging { opacity:0.4; }
+ * li.drag-over { border-color:var(--blue); box-shadow:0 0 0 2px rgba(88,166,255,0.3); } */

@@ -1,0 +1,6 @@
+/* 03 - Modal CSS 가이드
+ * #modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:1000; }
+ * #modal-overlay[hidden] { display:none; }
+ * #modal { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:32px; max-width:480px; width:100%; }
+ * 열기 애니메이션: @keyframes modalIn { from { opacity:0; transform:scale(0.95) } to { opacity:1; transform:scale(1) } }
+ * #modal { animation: modalIn 0.2s ease; } */

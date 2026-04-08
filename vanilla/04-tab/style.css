@@ -1,0 +1,6 @@
+/* 04 - Tab CSS 가이드
+ * [role="tablist"] { display:flex; border-bottom:2px solid var(--border); position:relative; }
+ * [role="tab"] { padding:10px 20px; background:none; border:none; color:var(--text-sub); cursor:pointer; position:relative; }
+ * [role="tab"][aria-selected="true"] { color:var(--blue); }
+ * 인디케이터: .tab-indicator { position:absolute; bottom:-2px; height:2px; background:var(--blue); transition:left 0.3s ease, width 0.3s ease; }
+ * [role="tabpanel"] { padding:20px 0; } */

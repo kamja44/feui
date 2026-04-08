@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>14 Sortable Table — Vanilla</title>
+  <link rel="stylesheet" href="../_shared/base.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <h1>14 · Sortable Table</h1>
+  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+
+  <section class="section">
+    <div id="table-controls">
+      <input type="text" id="filter-input" placeholder="검색..." />
+      <span id="result-count"></span>
+    </div>
+    <div id="table-wrapper">
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th data-key="name"    aria-sort="none">이름 <span class="sort-icon">↕</span></th>
+            <th data-key="age"     aria-sort="none">나이 <span class="sort-icon">↕</span></th>
+            <th data-key="city"    aria-sort="none">도시 <span class="sort-icon">↕</span></th>
+            <th data-key="salary"  aria-sort="none">연봉 <span class="sort-icon">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    <div id="pagination"></div>
+  </section>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

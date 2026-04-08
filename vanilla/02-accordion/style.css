@@ -1,0 +1,7 @@
+/* 02 - Accordion CSS 가이드
+ * .accordion-item button { display:flex; justify-content:space-between; width:100%; background:var(--surface2); border:1px solid var(--border); padding:14px 16px; border-radius:var(--radius); cursor:pointer; }
+ * .panel-wrapper { display:grid; grid-template-rows:0fr; transition:grid-template-rows 0.3s ease; }
+ * .panel-wrapper[data-open] { grid-template-rows:1fr; }
+ * .panel-inner { overflow:hidden; padding:0 16px; }
+ * .arrow { transition:transform 0.3s ease; }
+ * button[aria-expanded="true"] .arrow { transform:rotate(180deg); } */
