@@ -10,6 +10,9 @@
 //   4. 선택된 사람 수를 실시간으로 표시한다 (예: "2 / 4명 선택됨")
 //   5. Toggle Switch도 추가로 구현한다 (다크모드 ON/OFF 예시)
 //
+
+import { useState } from "react";
+
 // 주어진 데이터:
 const people = [
   { id: 1, name: "김철수", role: "Frontend" },
@@ -44,5 +47,47 @@ const people = [
 //   - 전부 체크 → checked=true / 일부 체크 → indeterminate=true / 모두 해제 → checked=false
 
 export default function CheckboxDemo() {
-  return <div>{/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}</div>;
+  const [checked, setChecked] = useState<boolean[]>(people.map(() => false));
+  const checkedCount = checked.filter(Boolean).length;
+  const allChecked = checkedCount === people.length;
+
+  const handleAll = () => {
+    setChecked(people.map(() => !allChecked));
+  };
+  const handleItem = (idx: number) => {
+    setChecked((prev) =>
+      prev.map((item, index) => (index === idx ? !item : item)),
+    );
+  };
+  return (
+    <div>
+      <p>
+        {checkedCount} / {people.length}명 선택됨
+      </p>
+      <label htmlFor="allSelected">
+        <div>
+          <input
+            id="allSelected"
+            type="checkbox"
+            onChange={handleAll}
+            checked={allChecked}
+          />
+          전체선택
+        </div>
+      </label>
+      {people.map((item, index) => {
+        return (
+          <label key={item.id + item.name} htmlFor={item.id + item.name}>
+            <input
+              id={item.id + item.name}
+              type="checkbox"
+              checked={checked[index]}
+              onChange={() => handleItem(index)}
+            />
+            {item.name} - {item.role}
+          </label>
+        );
+      })}
+    </div>
+  );
 }
