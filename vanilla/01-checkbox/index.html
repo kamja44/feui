@@ -1,34 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>01 Checkbox / Toggle — Vanilla</title>
-  <link rel="stylesheet" href="../_shared/base.css" />
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <h1>01 · Checkbox / Toggle</h1>
-  <div class="todo-banner">🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01 Checkbox / Toggle — Vanilla</title>
+    <link rel="stylesheet" href="../_shared/base.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>01 · Checkbox / Toggle</h1>
+    <div class="todo-banner">
+      🔨 아래 주석을 참고하여 main.ts와 style.css를 구현하세요
+    </div>
 
-  <!-- 1. 기본 Checkbox -->
-  <section class="section">
-    <h2>1. 기본 Checkbox (커스텀 스타일)</h2>
-    <div id="basic-checkbox"><!-- JS로 생성 또는 직접 HTML 작성 --></div>
-  </section>
+    <!-- 1. 기본 Checkbox -->
+    <section class="section">
+      <h2>팀원 선택</h2>
+      <p id="counter">0 / 4명 선택됨</p>
+      <div id="check-list"></div>
+    </section>
 
-  <!-- 2. Toggle Switch -->
-  <section class="section">
-    <h2>2. Toggle Switch</h2>
-    <div id="toggle-switch"></div>
-  </section>
+    <!-- 2. Toggle Switch -->
+    <section class="section">
+      <h2>2. Toggle Switch</h2>
+      <input type="checkbox" id="toggle-input" />
+      <label for="toggle-input" class="toggle-track">
+        <span class="toggle-thumb"></span>
+      </label>
+      <span id="toggle-status">다크 모드 OFF</span>
+    </section>
 
-  <!-- 3. Indeterminate / Select All -->
-  <section class="section">
-    <h2>3. Indeterminate (전체 선택)</h2>
-    <div id="indeterminate"></div>
-  </section>
-
-  <script type="module" src="./main.ts"></script>
-</body>
+    <script type="module" src="./main.ts"></script>
+  </body>
 </html>

@@ -12,10 +12,10 @@
 //
 // 주어진 데이터:
 const people = [
-  { id: 1, name: '김철수', role: 'Frontend' },
-  { id: 2, name: '이영희', role: 'Backend'  },
-  { id: 3, name: '박민준', role: 'Designer' },
-  { id: 4, name: '최수진', role: 'DevOps'   },
+  { id: 1, name: "김철수", role: "Frontend" },
+  { id: 2, name: "이영희", role: "Backend" },
+  { id: 3, name: "박민준", role: "Designer" },
+  { id: 4, name: "최수진", role: "DevOps" },
 ];
 
 // ════════════════════════════════════════════════
@@ -50,3 +50,54 @@ const people = [
 //   - input:checked + .thumb → translateX()
 
 // TODO: 위 문제와 힌트를 참고하여 구현하세요
+
+function createCheckbox() {
+  const container = document.querySelector("#check-list");
+  // 전체 선택
+  const selectAll = document.createElement("input");
+  selectAll.type = "checkbox";
+  selectAll.id = "selectAll";
+  const selectAllLabel = document.createElement("label");
+  selectAllLabel.htmlFor = "selectAll";
+  selectAllLabel.textContent = "전체 선택";
+  selectAllLabel.append(selectAll);
+  container?.append(selectAllLabel);
+
+  const itemArray: HTMLInputElement[] = [];
+
+  const updateFn = () => {
+    const $counter = document.querySelector("#counter") as HTMLElement;
+    const checked = itemArray.filter((item) => item.checked).length;
+    $counter.textContent = `${checked} / ${itemArray.length}명 선택됨`;
+  };
+
+  selectAll.addEventListener("click", () => {
+    itemArray.forEach((item) => (item.checked = selectAll.checked));
+    updateFn();
+  });
+
+  // 개별 Item
+  people.forEach((item) => {
+    const input = document.createElement("input");
+    input.id = `${item.name} - ${item.id}`;
+    input.type = "checkbox";
+    const label = document.createElement("label");
+    label.htmlFor = `${item.name} - ${item.id}`;
+    label.textContent = `${item.name} - ${item.role}`;
+
+    input.addEventListener("click", () => {
+      if (selectAll.checked) {
+        selectAll.checked = false;
+      }
+      const isAllChecked = itemArray.every((item) => item.checked);
+      if (isAllChecked) {
+        selectAll.checked = true;
+      }
+      updateFn();
+    });
+    itemArray.push(input);
+    label.append(input);
+    container?.append(label);
+  });
+}
+createCheckbox();

@@ -12,10 +12,10 @@
 //
 // 주어진 데이터:
 const people = [
-  { id: 1, name: '김철수', role: 'Frontend' },
-  { id: 2, name: '이영희', role: 'Backend' },
-  { id: 3, name: '박민준', role: 'Designer' },
-  { id: 4, name: '최수진', role: 'DevOps' },
+  { id: 1, name: "김철수", role: "Frontend" },
+  { id: 2, name: "이영희", role: "Backend" },
+  { id: 3, name: "박민준", role: "Designer" },
+  { id: 4, name: "최수진", role: "DevOps" },
 ];
 
 // ════════════════════════════════════════════════
@@ -44,9 +44,5 @@ const people = [
 //   - 전부 체크 → checked=true / 일부 체크 → indeterminate=true / 모두 해제 → checked=false
 
 export default function CheckboxDemo() {
-  return (
-    <div>
-      {/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}
-    </div>
-  );
+  return <div>{/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}</div>;
 }

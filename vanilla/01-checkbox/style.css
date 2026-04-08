@@ -17,3 +17,149 @@
  *   input:indeterminate { ... } /* 인디터미닛 상태 CSS */
 
 /* TODO: 위 가이드를 참고하여 스타일을 구현하세요 */
+
+/* 기본 체크 박스 */
+#counter {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  margin-bottom: 16px;
+}
+#check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 토글 스위치 */
+#toggle-input {
+  display: none;
+}
+.toggle-track {
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#toggle-input:checked + .toggle-track {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+#toggle-input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(22px);
+  background: white;
+}
+
+/* 체크 아이템 레이아웃 */
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.check-item:hover {
+  background: var(--surface2);
+}
+/* 이름, 역할 텍스트 */
+.cb-name {
+  font-size: 0.875rem;
+  color: var(--text);
+}
+.cb-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: auto; /* 오른쪽 끝으로 밀기 */
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+/* 구분선 */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 6px 0;
+}
+/* 실제 input 숨기기 (접근성 유지) */
+.cb-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--blue); /* 체크 시 파란색 */
+}
+/* 커스텀 체크박스 박스 */
+.cb-box {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface2);
+  position: relative;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+/* 체크마크: ::after 로 그리기 */
+.cb-box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+/* checked 시 박스 색상 변경 */
+.cb-input:checked + .cb-box {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+/* checked 시 체크마크 표시 */
+.cb-input:checked + .cb-box::after {
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+}
+/* indeterminate 시 가로 줄(−) 표현 */
+.cb-input:indeterminate + .cb-box {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.cb-input:indeterminate + .cb-box::after {
+  width: 10px;
+  height: 0;
+  left: 2px;
+  top: 6px;
+  border: none;
+  border-top: 2px solid white;
+  transform: none;
+  opacity: 1;
+}
