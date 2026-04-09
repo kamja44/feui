@@ -9,13 +9,34 @@
 //   3. 펼침/닫힘 시 높이 애니메이션이 부드럽게 동작한다 (CSS Grid 트릭 권장)
 //   4. 화살표(▼) 아이콘이 열림 시 180도 회전한다
 //
+
 // 주어진 데이터:
 const faqs = [
-  { id: 1, q: 'React와 Vue의 차이는 무엇인가요?',         a: 'React는 UI 라이브러리이고, Vue는 프레임워크입니다.' },
-  { id: 2, q: 'TypeScript를 사용해야 하는 이유는?',       a: '정적 타입 검사로 런타임 오류를 사전에 방지합니다.' },
-  { id: 3, q: 'useState와 useReducer의 차이는?',          a: 'useState는 단순 상태에, useReducer는 복잡한 로직에 적합합니다.' },
-  { id: 4, q: 'CSS-in-JS vs CSS Modules 비교',            a: 'CSS Modules는 성능이 좋고, CSS-in-JS는 동적 스타일에 편리합니다.' },
-  { id: 5, q: 'Vite가 Webpack보다 빠른 이유는?',          a: 'ESM 네이티브 사용과 esbuild 덕분에 Cold Start가 빠릅니다.' },
+  {
+    id: 1,
+    q: "React와 Vue의 차이는 무엇인가요?",
+    a: "React는 UI 라이브러리이고, Vue는 프레임워크입니다.",
+  },
+  {
+    id: 2,
+    q: "TypeScript를 사용해야 하는 이유는?",
+    a: "정적 타입 검사로 런타임 오류를 사전에 방지합니다.",
+  },
+  {
+    id: 3,
+    q: "useState와 useReducer의 차이는?",
+    a: "useState는 단순 상태에, useReducer는 복잡한 로직에 적합합니다.",
+  },
+  {
+    id: 4,
+    q: "CSS-in-JS vs CSS Modules 비교",
+    a: "CSS Modules는 성능이 좋고, CSS-in-JS는 동적 스타일에 편리합니다.",
+  },
+  {
+    id: 5,
+    q: "Vite가 Webpack보다 빠른 이유는?",
+    a: "ESM 네이티브 사용과 esbuild 덕분에 Cold Start가 빠릅니다.",
+  },
 ];
 
 // ════════════════════════════════════════════════
@@ -44,3 +65,47 @@ const faqs = [
 //   .panel-wrapper > div { overflow:hidden; }
 
 // TODO: 위 문제와 힌트를 참고하여 구현하세요
+
+function createAccordion() {
+  const container = document.querySelector("#accordion-single");
+  let currentOpen: HTMLElement | null = null;
+  let currentBtn: HTMLButtonElement | null = null;
+
+  faqs.forEach((faq) => {
+    const item    = document.createElement("div");
+    const btn     = document.createElement("button");
+    const wrapper = document.createElement("div");
+    const panel   = document.createElement("div");
+
+    item.className    = "accordion-item";
+    wrapper.className = "panel-wrapper";
+    btn.innerHTML     = `${faq.q} <span class="arrow">▼</span>`;
+    panel.textContent = faq.a;
+
+    btn.addEventListener("click", () => {
+      if (currentOpen === wrapper) {
+        // 같은 항목 클릭 → 닫기
+        wrapper.classList.remove("open");
+        btn.classList.remove("open");
+        currentOpen = null;
+        currentBtn  = null;
+      } else {
+        // 이전에 열린 항목 닫기
+        if (currentOpen) currentOpen.classList.remove("open");
+        if (currentBtn)  currentBtn.classList.remove("open");
+
+        // 새 항목 열기
+        wrapper.classList.add("open");
+        btn.classList.add("open");
+        currentOpen = wrapper;
+        currentBtn  = btn;
+      }
+    });
+
+    wrapper.append(panel);
+    item.append(btn, wrapper);
+    container?.append(item);
+  });
+}
+createAccordion();
+

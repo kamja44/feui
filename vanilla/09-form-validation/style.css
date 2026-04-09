@@ -1,9 +1,70 @@
-/* 09 - Form Validation CSS 가이드
- * .field { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
- * label { font-size:0.85rem; font-weight:500; color:var(--text-sub); }
- * input { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; color:var(--text); font-size:0.9rem; outline:none; transition:border-color 0.2s; }
- * input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(88,166,255,0.15); }
- * input.invalid { border-color:var(--red); }
- * input.valid { border-color:var(--green); }
- * .error-msg { font-size:0.75rem; color:var(--red); min-height:18px; }
- * button[type="submit"] { width:100%; padding:12px; background:var(--blue); color:white; border:none; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer; } */
+/* ━━━ 폼 레이아웃 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#signup-form {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text2, #aaa);
+}
+
+/* ━━━ 인풋 기본 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.field input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.field input:focus {
+  border-color: #58a6ff;
+}
+
+/* ━━━ 유효성 상태 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.field input.valid {
+  border-color: #3fb950;
+}
+
+.field input.invalid {
+  border-color: #f85149;
+}
+
+/* ━━━ 에러 메시지 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.error-msg {
+  font-size: 0.8rem;
+  color: #f85149;
+  min-height: 1.2em;
+}
+
+/* ━━━ 제출 버튼 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#signup-form button[type="submit"] {
+  padding: 12px;
+  background: #58a6ff;
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#signup-form button[type="submit"]:hover {
+  background: #79b8ff;
+}

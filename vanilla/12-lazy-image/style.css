@@ -1,7 +1,51 @@
-/* 12 - Lazy Image CSS 가이드
- * #image-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
- * .img-card { aspect-ratio:4/3; border-radius:8px; overflow:hidden; background:var(--surface2); position:relative; }
- * .lazy-img { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.4s ease; }
- * .lazy-img.loaded { opacity:1; }
- * Shimmer: .img-card::before { content:''; position:absolute; inset:0; background:linear-gradient(...); animation:shimmer 1.5s infinite; }
- * .img-card:has(.lazy-img.loaded)::before { display:none; } */
+/* ━━━ 이미지 그리드 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 8px 0;
+}
+
+/* ━━━ 이미지 카드 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.img-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  aspect-ratio: 4/3;
+  position: relative;
+}
+
+/* ━━━ lazy-img 기본 (로드 전) ━━━━━━━━━━━━━━━━━━ */
+.lazy-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* JS에서 로드 완료 시 .loaded 클래스 추가 */
+.lazy-img.loaded {
+  opacity: 1;
+}
+
+/* ━━━ 로딩 중 shimmer 플레이스홀더 ━━━━━━━━━━━━━ */
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--border) 25%, var(--surface3, #2a2a3a) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* placeholder는 로드되면 숨김 */
+.lazy-img.loaded ~ .img-placeholder {
+  display: none;
+}

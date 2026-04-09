@@ -1,6 +1,50 @@
-/* 08 - Drag & Drop CSS 가이드
- * #dnd-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
- * #dnd-list li { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; cursor:grab; user-select:none; transition:box-shadow 0.2s, opacity 0.2s; }
- * #dnd-list li:active { cursor:grabbing; }
- * li.dragging { opacity:0.4; }
- * li.drag-over { border-color:var(--blue); box-shadow:0 0 0 2px rgba(88,166,255,0.3); } */
+/* ━━━ 드래그 리스트 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#dnd-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+
+/* ━━━ 드래그 아이템 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#dnd-list li {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s, opacity 0.2s;
+  user-select: none;
+}
+
+#dnd-list li:hover { background: var(--surface3, #2a2a3a); }
+#dnd-list li:active { cursor: grabbing; }
+
+/* ━━━ 드래그 중 상태 ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#dnd-list li.dragging {
+  opacity: 0.4;
+  border: 2px dashed var(--border);
+}
+
+/* ━━━ 드롭 구분선 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#dnd-list li.drag-over {
+  border-top: 2px solid #58a6ff;
+}
+
+/* ━━━ 우선순위 뱃지 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.priority {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.priority.high   { background: #f85149; }
+.priority.medium { background: #d29922; }
+.priority.low    { background: #3fb950; }

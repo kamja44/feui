@@ -1,12 +1,131 @@
-/* 15 - Progress Stepper CSS 가이드
- * #step-indicator { display:flex; align-items:center; gap:0; margin-bottom:16px; }
- * .step-dot { width:32px; height:32px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:600; flex-shrink:0; transition:all 0.3s; }
- * .step-dot.done    { background:var(--green); border-color:var(--green); color:white; }
- * .step-dot.current { background:var(--blue);  border-color:var(--blue);  color:white; }
- * .step-connector { flex:1; height:2px; background:var(--border); transition:background 0.3s; }
- * .step-connector.done { background:var(--green); }
- * #progress-bar-wrapper { height:4px; background:var(--surface2); border-radius:999px; overflow:hidden; margin-bottom:24px; }
- * #progress-bar { height:100%; background:linear-gradient(90deg, var(--blue), var(--purple)); transition:width 0.4s ease; }
- * #step-actions { display:flex; justify-content:space-between; margin-top:24px; }
- * #step-actions button { padding:10px 24px; border:1px solid var(--border); border-radius:8px; background:var(--surface2); color:var(--text); cursor:pointer; font-weight:500; }
- * #btn-next { background:var(--blue); border-color:var(--blue); color:white; } */
+/* ━━━ 스텝 인디케이터 ━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* 스텝 원 */
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text2, #888);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.step-item.active .step-circle {
+  background: #58a6ff;
+  border-color: #58a6ff;
+  color: #000;
+}
+
+.step-item.done .step-circle {
+  background: #3fb950;
+  border-color: #3fb950;
+  color: #000;
+}
+
+/* 스텝 라벨 */
+.step-label {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--text2, #888);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.step-item.active .step-label,
+.step-item.done .step-label {
+  color: var(--text);
+}
+
+/* 스텝 연결선 */
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  top: -10px;
+  min-width: 40px;
+  transition: background 0.3s;
+}
+
+.step-line.done { background: #3fb950; }
+
+/* ━━━ 진행 바 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#progress-bar-wrapper {
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #58a6ff, #3fb950);
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ━━━ 스텝 콘텐츠 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#step-content {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  min-height: 120px;
+  margin-bottom: 20px;
+  animation: fade-in 0.25s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#step-content h3 { margin: 0 0 10px; }
+#step-content p  { color: var(--text2, #aaa); margin: 0; }
+
+/* ━━━ 이전/다음 버튼 ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#step-actions {
+  display: flex;
+  gap: 12px;
+}
+
+#btn-prev {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+#btn-next {
+  background: #58a6ff;
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+
+#btn-prev:disabled,
+#btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

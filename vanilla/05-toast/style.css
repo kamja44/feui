@@ -1,9 +1,54 @@
-/* 05 - Toast CSS 가이드
- * #toast-container { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:8px; z-index:9999; }
- * .toast { padding:12px 18px; border-radius:8px; font-size:0.875rem; font-weight:500; min-width:240px;
- *          transform:translateX(110%); opacity:0; transition:all 0.3s ease; cursor:pointer; border:1px solid; }
- * .toast.show { transform:translateX(0); opacity:1; }
- * .toast-info    { background:rgba(88,166,255,0.12); border-color:rgba(88,166,255,0.3); color:var(--blue); }
- * .toast-success { background:rgba(63,185,80,0.12);  border-color:rgba(63,185,80,0.3);  color:var(--green); }
- * .toast-error   { background:rgba(248,81,73,0.12);  border-color:rgba(248,81,73,0.3);  color:var(--red); }
- * .toast-warning { background:rgba(227,179,65,0.12); border-color:rgba(227,179,65,0.3); color:var(--yellow); } */
+/* ━━━ 버튼 영역 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ━━━ 토스트 컨테이너 (우측 하단 고정) ━━━━━━━━━━ */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ━━━ 토스트 공통 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border-left: 4px solid transparent;
+  min-width: 260px;
+  max-width: 360px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  cursor: pointer;
+  pointer-events: auto;
+
+  /* 초기 숨김 상태 */
+  opacity: 0;
+  transform: translateX(110%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast.hide {
+  opacity: 0;
+  transform: translateX(110%);
+}
+
+/* ━━━ 토스트 타입별 색상 ━━━━━━━━━━━━━━━━━━━━━━━ */
+.toast-success { background: #1a2e1a; border-color: #3fb950; }
+.toast-error   { background: #2e1a1a; border-color: #f85149; }
+.toast-warning { background: #2e2a1a; border-color: #d29922; }
+.toast-info    { background: #1a1e2e; border-color: #58a6ff; }

@@ -1,10 +1,116 @@
-/* 13 - Date Picker CSS 가이드
- * #datepicker-container { position:relative; max-width:320px; }
- * #date-input { width:100%; padding:10px 14px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--text); cursor:pointer; }
- * #calendar { position:absolute; top:calc(100% + 4px); background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,0.5); z-index:100; width:100%; }
- * #calendar-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
- * #days-grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; }
- * #days-grid button { aspect-ratio:1; border:none; background:none; color:var(--text); border-radius:6px; cursor:pointer; font-size:0.8rem; }
- * #days-grid button:hover { background:var(--surface2); }
- * #days-grid button.today { color:var(--blue); font-weight:700; }
- * #days-grid button.selected { background:var(--blue); color:white; } */
+/* ━━━ 날짜 인풋 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#datepicker-container {
+  position: relative;
+  max-width: 320px;
+}
+
+#date-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#date-input:focus { border-color: #58a6ff; }
+
+/* ━━━ 캘린더 팝업 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#calendar {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  z-index: 200;
+  width: 280px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: pop-in 0.15s ease;
+}
+
+@keyframes pop-in {
+  from { transform: translateY(-6px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ━━━ 헤더 (이전/다음 월) ━━━━━━━━━━━━━━━━━━━━━━━ */
+#calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#calendar-header button {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#calendar-header button:hover { background: var(--surface3, #333); }
+
+#month-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ━━━ 요일 헤더 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+#weekdays span {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text2, #888);
+  padding: 4px 0;
+}
+
+/* ━━━ 날짜 그리드 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+#days-grid button {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-align: center;
+  transition: background 0.15s;
+}
+
+#days-grid button:hover { background: var(--surface3, #333); }
+
+#days-grid button.today { color: #58a6ff; font-weight: 700; }
+
+#days-grid button.selected {
+  background: #58a6ff;
+  color: #000;
+  font-weight: 700;
+}
+
+#days-grid button.other-month { color: var(--text2, #555); }
+
+#days-grid button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

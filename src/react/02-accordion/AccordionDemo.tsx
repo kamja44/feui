@@ -10,13 +10,42 @@
 //   4. 화살표(▼) 아이콘이 열림 시 180도 회전한다
 //   5. (추가) 버튼을 만들어 단일/다중 오픈 모드를 토글할 수 있게 한다
 //
+
+import { useState } from "react";
+import "./AccordionDemo.css";
+
 // 주어진 데이터:
 const faqs = [
-  { id: 1, question: 'React와 Vue의 차이는 무엇인가요?',        answer: 'React는 UI 라이브러리이고, Vue는 프레임워크입니다. React는 JSX를 사용하며 더 유연하고, Vue는 템플릿 문법으로 진입 장벽이 낮습니다.' },
-  { id: 2, question: 'TypeScript를 사용해야 하는 이유는?',      answer: '정적 타입 검사로 런타임 오류를 사전에 방지할 수 있고, IDE 자동완성과 리팩터링 지원이 강력합니다.' },
-  { id: 3, question: 'useState와 useReducer의 차이는?',         answer: 'useState는 단순한 상태에, useReducer는 복잡한 상태 로직이나 다음 상태가 이전 상태에 의존할 때 적합합니다.' },
-  { id: 4, question: 'CSS-in-JS vs CSS Modules 무엇이 좋나요?', answer: 'CSS Modules는 빌드 타임에 처리되어 성능이 좋고, CSS-in-JS는 동적 스타일링이 편리합니다. 프로젝트 성격에 따라 선택하세요.' },
-  { id: 5, question: 'Vite가 Webpack보다 빠른 이유는?',         answer: 'Vite는 개발 시 ESM을 네이티브로 사용하고 esbuild로 번들링하여 Cold Start가 매우 빠릅니다.' },
+  {
+    id: 1,
+    question: "React와 Vue의 차이는 무엇인가요?",
+    answer:
+      "React는 UI 라이브러리이고, Vue는 프레임워크입니다. React는 JSX를 사용하며 더 유연하고, Vue는 템플릿 문법으로 진입 장벽이 낮습니다.",
+  },
+  {
+    id: 2,
+    question: "TypeScript를 사용해야 하는 이유는?",
+    answer:
+      "정적 타입 검사로 런타임 오류를 사전에 방지할 수 있고, IDE 자동완성과 리팩터링 지원이 강력합니다.",
+  },
+  {
+    id: 3,
+    question: "useState와 useReducer의 차이는?",
+    answer:
+      "useState는 단순한 상태에, useReducer는 복잡한 상태 로직이나 다음 상태가 이전 상태에 의존할 때 적합합니다.",
+  },
+  {
+    id: 4,
+    question: "CSS-in-JS vs CSS Modules 무엇이 좋나요?",
+    answer:
+      "CSS Modules는 빌드 타임에 처리되어 성능이 좋고, CSS-in-JS는 동적 스타일링이 편리합니다. 프로젝트 성격에 따라 선택하세요.",
+  },
+  {
+    id: 5,
+    question: "Vite가 Webpack보다 빠른 이유는?",
+    answer:
+      "Vite는 개발 시 ESM을 네이티브로 사용하고 esbuild로 번들링하여 Cold Start가 매우 빠릅니다.",
+  },
 ];
 
 // ════════════════════════════════════════════════
@@ -41,9 +70,29 @@ const faqs = [
 //   - transition: transform 0.3s ease
 
 export default function AccordionDemo() {
+  const [openId, setOpenId] = useState<number | null>(null);
+  const handleClick = (id: number) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
   return (
     <div>
-      {/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}
+      {faqs.map((item) => {
+        const isOpen = item.id === openId;
+        return (
+          <div key={item.id} className="accordion-item">
+            <button
+              className={isOpen ? "open" : ""}
+              onClick={() => handleClick(item.id)}
+            >
+              {item.question}
+              <span className="arrow">▼</span>
+            </button>
+            <div className={`panel-wrapper${isOpen ? " open" : ""}`}>
+              <div>{item.answer}</div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

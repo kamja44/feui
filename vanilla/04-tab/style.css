@@ -1,6 +1,60 @@
-/* 04 - Tab CSS 가이드
- * [role="tablist"] { display:flex; border-bottom:2px solid var(--border); position:relative; }
- * [role="tab"] { padding:10px 20px; background:none; border:none; color:var(--text-sub); cursor:pointer; position:relative; }
- * [role="tab"][aria-selected="true"] { color:var(--blue); }
- * 인디케이터: .tab-indicator { position:absolute; bottom:-2px; height:2px; background:var(--blue); transition:left 0.3s ease, width 0.3s ease; }
- * [role="tabpanel"] { padding:20px 0; } */
+/* ━━━ 탭 컨테이너 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#tab-container {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ━━━ 탭 목록 (tablist) ━━━━━━━━━━━━━━━━━━━━━━━━ */
+[role="tablist"] {
+  display: flex;
+  position: relative;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+
+[role="tab"] {
+  flex: 1;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  color: var(--text2, #888);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+[role="tab"]:hover {
+  color: var(--text);
+}
+
+[role="tab"][aria-selected="true"] {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ━━━ 슬라이딩 인디케이터 ━━━━━━━━━━━━━━━━━━━━━━━ */
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: #58a6ff;
+  transition: left 0.25s ease, width 0.25s ease;
+}
+
+/* ━━━ 탭 패널 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+[role="tabpanel"] {
+  padding: 24px;
+  background: var(--surface);
+  animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+[role="tabpanel"] h3 { margin: 0 0 12px; }
+[role="tabpanel"] p, [role="tabpanel"] li { color: var(--text2, #aaa); }
