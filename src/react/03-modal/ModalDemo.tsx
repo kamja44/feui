@@ -11,12 +11,41 @@
 //   5. 모달 내 포커스가 갇혀야 한다 (Tab 키로 모달 밖으로 나가지 않음)
 //   6. ReactDOM.createPortal을 사용하여 document.body에 렌더링한다
 //
+
+import { useEffect, useState, type KeyboardEvent } from "react";
+import "./ModalDemo.css";
+import { createPortal } from "react-dom";
+
 // 주어진 데이터:
 const products = [
-  { id: 1, name: 'MacBook Pro 14"',  price: 2_490_000, category: 'Laptop',  desc: 'Apple M3 Pro 칩, 18GB RAM, 512GB SSD. 크리에이터를 위한 최강 성능의 노트북.' },
-  { id: 2, name: 'iPhone 15 Pro',    price: 1_550_000, category: 'Phone',   desc: 'A17 Pro 칩, 티타늄 디자인, 프로급 카메라 시스템. 가장 강력한 iPhone.' },
-  { id: 3, name: 'AirPods Pro 2세대',price:   359_000, category: 'Audio',   desc: '적응형 오디오, 개인화된 공간 음향. 완벽한 노이즈 캔슬링 경험.' },
-  { id: 4, name: 'iPad Air M2',      price:   929_000, category: 'Tablet',  desc: 'M2 칩 탑재, 11인치 Liquid Retina 디스플레이. 가벼움과 성능의 완벽한 균형.' },
+  {
+    id: 1,
+    name: 'MacBook Pro 14"',
+    price: 2_490_000,
+    category: "Laptop",
+    desc: "Apple M3 Pro 칩, 18GB RAM, 512GB SSD. 크리에이터를 위한 최강 성능의 노트북.",
+  },
+  {
+    id: 2,
+    name: "iPhone 15 Pro",
+    price: 1_550_000,
+    category: "Phone",
+    desc: "A17 Pro 칩, 티타늄 디자인, 프로급 카메라 시스템. 가장 강력한 iPhone.",
+  },
+  {
+    id: 3,
+    name: "AirPods Pro 2세대",
+    price: 359_000,
+    category: "Audio",
+    desc: "적응형 오디오, 개인화된 공간 음향. 완벽한 노이즈 캔슬링 경험.",
+  },
+  {
+    id: 4,
+    name: "iPad Air M2",
+    price: 929_000,
+    category: "Tablet",
+    desc: "M2 칩 탑재, 11인치 Liquid Retina 디스플레이. 가벼움과 성능의 완벽한 균형.",
+  },
 ];
 
 // ════════════════════════════════════════════════
@@ -41,9 +70,64 @@ const products = [
 //   - useEffect cleanup에서 반드시 복원
 
 export default function ModalDemo() {
+  const [selectedProduct, setSelectedProduct] = useState<
+    (typeof products)[0] | null
+  >(null);
+
+  useEffect(() => {
+    if (!selectedProduct) {
+      return;
+    }
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSelectedProduct(null);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProduct]);
+
   return (
     <div>
-      {/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}
+      <div className="card-grid">
+        {products.map((product) => {
+          return (
+            <div
+              key={product.id}
+              className="card"
+              onClick={() => setSelectedProduct(product)}
+            >
+              <div className="category">{product.category}</div>
+              <div>{product.name}</div>
+              <div className="price">{product.price.toLocaleString()}원</div>
+            </div>
+          );
+        })}
+
+        {/* modal */}
+        {selectedProduct &&
+          createPortal(
+            <div id="modal-overlay" onClick={() => setSelectedProduct(null)}>
+              <div id="modal" onClick={(e) => e.stopPropagation()}>
+                <h2 id="modal-title">{selectedProduct.name}</h2>
+                <p>{selectedProduct.desc}</p>
+                <button
+                  id="close-modal"
+                  onClick={() => setSelectedProduct(null)}
+                >
+                  닫기
+                </button>
+              </div>
+            </div>,
+            document.body,
+          )}
+      </div>
     </div>
   );
 }
