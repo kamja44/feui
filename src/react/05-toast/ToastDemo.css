@@ -1,0 +1,66 @@
+/* ━━━ 버튼 영역 ━━━ */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+/* ━━━ 토스트 컨테이너 (우측 하단 고정) ━━━ */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  pointer-events: none; /* 컨테이너 자체는 클릭 안되게 투과 */
+}
+/* ━━━ 토스트 공통 ━━━ */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+  min-width: 260px;
+  max-width: 360px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  pointer-events: auto; /* 실제 토스트는 클릭 가능해야 함 */
+  /* 애니메이션: 들어오는 상태(show)일 때 제어 */
+  opacity: 0;
+  transform: translateX(110%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.toast.hide {
+  opacity: 0;
+  transform: translateX(110%);
+}
+/* ━━━ 토스트 타입별 색상 ━━━ */
+.toast-success {
+  background: #1a2e1a;
+  border-color: #3fb950;
+  color: #fff;
+}
+.toast-error {
+  background: #2e1a1a;
+  border-color: #f85149;
+  color: #fff;
+}
+.toast-warning {
+  background: #2e2a1a;
+  border-color: #d29922;
+  color: #fff;
+}
+.toast-info {
+  background: #1a1e2e;
+  border-color: #58a6ff;
+  color: #fff;
+}

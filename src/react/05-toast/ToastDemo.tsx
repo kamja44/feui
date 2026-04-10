@@ -11,16 +11,37 @@
 //   5. 나타날 때 오른쪽에서 슬라이드 인, 사라질 때 슬라이드 아웃 애니메이션
 //   6. useToast() 커스텀 훅으로 로직을 분리한다
 //
+
+import { useEffect, useState } from "react";
+import "./ToastDemo.css";
+import { createPortal } from "react-dom";
+
 // 주어진 데이터:
 const actions = [
-  { type: 'success' as const, label: '✅ 저장 완료',    message: '파일이 성공적으로 저장되었습니다.' },
-  { type: 'error'   as const, label: '❌ 오류 발생',    message: '서버와의 연결이 끊어졌습니다. 다시 시도해주세요.' },
-  { type: 'warning' as const, label: '⚠️ 주의',         message: '저장하지 않은 변경 사항이 있습니다.' },
-  { type: 'info'    as const, label: 'ℹ️ 업데이트',     message: '새로운 버전(v2.1.0)이 출시되었습니다.' },
+  {
+    type: "success" as const,
+    label: "✅ 저장 완료",
+    message: "파일이 성공적으로 저장되었습니다.",
+  },
+  {
+    type: "error" as const,
+    label: "❌ 오류 발생",
+    message: "서버와의 연결이 끊어졌습니다. 다시 시도해주세요.",
+  },
+  {
+    type: "warning" as const,
+    label: "⚠️ 주의",
+    message: "저장하지 않은 변경 사항이 있습니다.",
+  },
+  {
+    type: "info" as const,
+    label: "ℹ️ 업데이트",
+    message: "새로운 버전(v2.1.0)이 출시되었습니다.",
+  },
 ];
 
 // Toast 타입 정의
-type ToastType = 'success' | 'error' | 'warning' | 'info';
+type ToastType = "success" | "error" | "warning" | "info";
 interface Toast {
   id: number;
   message: string;
@@ -47,10 +68,91 @@ interface Toast {
 // ─── 자동 제거 (메모리 누수 주의) ────────────────
 //   - useEffect 안에서 setTimeout → cleanup에서 clearTimeout
 
+const useToast = () => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const add = (t: Omit<Toast, "id">) => {
+    setToasts((prev) => [...prev, { ...t, id: Date.now() }]);
+  };
+  const remove = (id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  return { toasts, add, remove };
+};
+
 export default function ToastDemo() {
+  const { toasts, add, remove } = useToast();
+
   return (
-    <div>
-      {/* TODO: 위 문제와 힌트를 참고하여 구현하세요 */}
+    <div className="section">
+      <div className="btn-group">
+        {actions.map((action, index) => {
+          return (
+            <button
+              key={action.type + index}
+              onClick={() =>
+                add({
+                  message: action.message,
+                  type: action.type,
+                })
+              }
+            >
+              {action.label}
+            </button>
+          );
+        })}
+      </div>
+      {createPortal(
+        <div className="toast-container">
+          {toasts.map((toast) => (
+            <ToastItem key={toast.id} toast={toast} onRemove={remove} />
+          ))}
+        </div>,
+        document.body,
+      )}
+    </div>
+  );
+}
+
+function ToastItem({
+  toast,
+  onRemove,
+  duration = 3000,
+}: {
+  toast: Toast;
+  onRemove: (id: number) => void;
+  duration?: number;
+}) {
+  const [isShowing, setIsShowing] = useState(false);
+
+  useEffect(() => {
+    const renderTime = requestAnimationFrame(() => setIsShowing(true));
+    return () => cancelAnimationFrame(renderTime);
+  }, []);
+
+  const handleRemove = () => {
+    setIsShowing(false);
+    setTimeout(() => {
+      onRemove(toast.id);
+    }, 300);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(handleRemove, duration);
+    return () => clearTimeout(timer);
+  }, [duration]);
+
+  const actionObj = actions.find((a) => a.type === toast.type);
+  const icon = actionObj ? actionObj.label.split(" ")[0] : "";
+
+  return (
+    <div
+      className={`toast toast-${toast.type} ${isShowing ? "show" : "hide"}`}
+      onClick={handleRemove}
+    >
+      <span style={{ fontSize: "1.2rem" }}>{icon}</span>
+      <span>{toast.message}</span>
     </div>
   );
 }
