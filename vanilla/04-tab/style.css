@@ -6,14 +6,14 @@
 }
 
 /* ━━━ 탭 목록 (tablist) ━━━━━━━━━━━━━━━━━━━━━━━━ */
-[role="tablist"] {
+.tablist {
   display: flex;
   position: relative;
   background: var(--surface2);
   border-bottom: 1px solid var(--border);
 }
 
-[role="tab"] {
+.tab-btn {
   flex: 1;
   padding: 14px 20px;
   background: transparent;
@@ -26,11 +26,11 @@
   z-index: 1;
 }
 
-[role="tab"]:hover {
+.tab-btn:hover {
   color: var(--text);
 }
 
-[role="tab"][aria-selected="true"] {
+.tab-btn.active {
   color: var(--text);
   font-weight: 600;
 }
@@ -45,7 +45,7 @@
 }
 
 /* ━━━ 탭 패널 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-[role="tabpanel"] {
+.tabpanel {
   padding: 24px;
   background: var(--surface);
   animation: fade-in 0.2s ease;
@@ -56,5 +56,5 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-[role="tabpanel"] h3 { margin: 0 0 12px; }
-[role="tabpanel"] p, [role="tabpanel"] li { color: var(--text2, #aaa); }
+.tabpanel h3 { margin: 0 0 12px; }
+.tabpanel p, .tabpanel li { color: var(--text2, #aaa); }

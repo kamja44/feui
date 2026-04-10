@@ -11,11 +11,20 @@
 //
 // 주어진 데이터:
 const profile = {
-  name:     '김개발',
-  email:    'dev.kim@example.com',
-  info: { bio: 'React와 TypeScript를 좋아하는 프론트엔드 개발자', location: '서울', website: 'https://devkim.io' },
-  activity: { posts: 42, likes: 128, comments: 37, recent: ['새 프로젝트 시작', 'CSS 트릭 공유', 'TypeScript tips'] },
-  settings: { notifications: true, darkMode: false, language: 'ko' },
+  name: "김개발",
+  email: "dev.kim@example.com",
+  info: {
+    bio: "React와 TypeScript를 좋아하는 프론트엔드 개발자",
+    location: "서울",
+    website: "https://devkim.io",
+  },
+  activity: {
+    posts: 42,
+    likes: 128,
+    comments: 37,
+    recent: ["새 프로젝트 시작", "CSS 트릭 공유", "TypeScript tips"],
+  },
+  settings: { notifications: true, darkMode: false, language: "ko" },
 };
 
 // ════════════════════════════════════════════════
@@ -50,3 +59,83 @@ const profile = {
 //   })
 
 // TODO: 위 문제와 힌트를 참고하여 구현하세요
+function createTabs() {
+  const container = document.querySelector("#tab-container")!;
+  container.innerHTML = "";
+
+  const tablist = document.createElement("div");
+  tablist.setAttribute("role", "tablist");
+  tablist.id = "tablist";
+
+  const indicator = document.createElement("div");
+  indicator.className = "tab-indicator";
+
+  const tabs: HTMLButtonElement[] = [];
+  const panels: HTMLElement[] = [];
+  const tabKeys = ["info", "activity", "settings"] as const;
+
+  const tabLabels = {
+    info: "정보",
+    activity: "활동",
+    settings: "설정",
+  };
+
+  tabKeys.forEach((key, i) => {
+    const btn = document.createElement("button");
+    const panel = document.createElement("div");
+
+    btn.className = i === 0 ? "tab-btn active" : "tab-btn";
+    btn.textContent = tabLabels[key];
+
+    panel.className = "tabpanel";
+    panel.hidden = i !== 0;
+
+    //내용
+    if (key === "info") {
+      panel.innerHTML = `
+        <h3>${profile.name} (${profile.email})</h3>
+        <p>${profile[key].bio}</p>
+        <ul><li>위치: ${profile[key].location}</li></ul>
+      `;
+    } else if (key === "activity") {
+      panel.innerHTML = `
+        <h3>활동 요약</h3>
+        <ul>
+          <li>게시글: ${profile[key].posts}</li>
+          <li>좋아요: ${profile[key].likes}</li>
+        </ul>
+        <h4>최근 활동</h4>
+        <ul>${profile[key].recent.map((item) => `<li>${item}</li>`).join("")}</ul>
+      `;
+    } else if (key === "settings") {
+      panel.innerHTML = `
+        <h3>설정</h3>
+        <p>알림: ${profile[key].notifications ? "ON" : "OFF"}</p>
+        <p>다크모드: ${profile[key].darkMode ? "ON" : "OFF"}</p>
+      `;
+    }
+
+    btn.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      panels.forEach((p) => (p.hidden = true));
+
+      btn.classList.add("active");
+      panel.hidden = false;
+
+      indicator.style.left = btn.offsetLeft + "px";
+      indicator.style.width = btn.offsetWidth + "px";
+    });
+
+    tabs.push(btn);
+    panels.push(panel);
+    tablist.append(btn);
+  });
+  tablist.append(indicator);
+  container.append(tablist, ...panels);
+
+  requestAnimationFrame(() => {
+    indicator.style.left = tabs[0].offsetLeft + "px";
+    indicator.style.width = tabs[0].offsetWidth + "px";
+  });
+}
+createTabs();
