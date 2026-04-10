@@ -12,10 +12,26 @@
 //
 // 주어진 데이터:
 const actions = [
-  { type: 'success', label: '✅ 저장 완료', message: '파일이 성공적으로 저장되었습니다.' },
-  { type: 'error',   label: '❌ 오류 발생', message: '서버와의 연결이 끊어졌습니다.' },
-  { type: 'warning', label: '⚠️ 주의',      message: '저장하지 않은 변경 사항이 있습니다.' },
-  { type: 'info',    label: 'ℹ️ 업데이트',  message: '새로운 버전(v2.1.0)이 출시되었습니다.' },
+  {
+    type: "success",
+    label: "✅ 저장 완료",
+    message: "파일이 성공적으로 저장되었습니다.",
+  },
+  {
+    type: "error",
+    label: "❌ 오류 발생",
+    message: "서버와의 연결이 끊어졌습니다.",
+  },
+  {
+    type: "warning",
+    label: "⚠️ 주의",
+    message: "저장하지 않은 변경 사항이 있습니다.",
+  },
+  {
+    type: "info",
+    label: "ℹ️ 업데이트",
+    message: "새로운 버전(v2.1.0)이 출시되었습니다.",
+  },
 ] as const;
 
 // ════════════════════════════════════════════════
@@ -49,3 +65,56 @@ const actions = [
 //   }
 
 // TODO: 위 문제와 힌트를 참고하여 구현하세요
+
+function showToast(message: string, type: string, duration = 3000) {
+  const container = document.getElementById("toast-container");
+
+  // 토스트 돔 생성
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+
+  const actionObj = actions.find((a) => a.type === type);
+  const icon = actionObj ? actionObj.label.split(" ")[0] : "";
+
+  toast.innerHTML = `
+    <span style='font-size: 1.2rem;'>${icon}</span>
+    <span>${message}</span>
+  `;
+
+  container?.append(toast);
+
+  // 브라우저에게 현재 DOM 상태를 강제로 계산하게 하여(Reflow 강제) 시작 상태를 인식시킵니다.
+  void toast.offsetWidth;
+  toast.classList.add("show");
+
+  // toast 제거 함수
+  const removeToast = () => {
+    toast.classList.remove("show");
+    toast.classList.add("hide");
+
+    toast.addEventListener("transitionend", () => toast.remove(), {
+      once: true,
+    });
+  };
+
+  // 지정된 시간 동안 자동 제거
+  const timer = setTimeout(removeToast, duration);
+
+  toast.addEventListener("click", () => {
+    clearTimeout(timer);
+    removeToast();
+  });
+}
+
+function initToastEvents() {
+  actions.forEach((action) => {
+    const btn = document.getElementById(`btn-${action.type}`);
+    if (btn) {
+      btn.addEventListener("click", () => {
+        showToast(action.message, action.type);
+      });
+    }
+  });
+}
+
+initToastEvents();
